@@ -1,17 +1,16 @@
 class Student {
-    constructor(id, firstName, lastName, fatherName, classEnrolled,
-        age, phoneNumber, subject, year, semester, status ) {
-            this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.fatherName = fatherName;
-            this.classEnrolled = classEnrolled;
-            this.age = age;
-            this.phoneNumber = phoneNumber;
-            this.subject = subject;
-            this.year = year;
-            this.semester = semester;
-            this.status = status;
+constructor( studentID, name, grade,school,parentName,parentPhone,parentEmail,SocialDifficulties,WayHome) {
+        this.id="";
+        this.name = name;
+        this.studentID =studentID;
+        this.grade=grade;
+        this.school=school;
+        this.parentName=parentName;
+        this.parentPhone=parentPhone;
+        this.parentEmail=parentEmail;
+        this.SocialDifficulties=SocialDifficulties;
+        this.WayHome=WayHome;
+        this.photoId="";
     }
 }
 
