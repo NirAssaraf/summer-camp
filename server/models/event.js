@@ -1,5 +1,5 @@
 class Event {
-    constructor( eventID, eventName, eventStartTime,eventEndTime,eventDate,eventLocation) {
+    constructor( eventID, eventName, eventStartTime,eventEndTime,eventDate,eventLocation,eventStatus) {
             this.id="";
             this.eventID =eventID;
             this.eventName = eventName;
@@ -7,6 +7,7 @@ class Event {
             this.eventEndTime=eventEndTime;
             this.eventDate=eventDate;
             this.eventLocation=eventLocation;
+            this.eventStatus=eventStatus;
         }
     }
     

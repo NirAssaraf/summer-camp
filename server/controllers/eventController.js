@@ -14,7 +14,8 @@ const addevent = async (req, res, next) => {
             data.eventStartTime,
             data.eventEndTime,
             data.eventDate,
-            data.eventLocation
+            data.eventLocation,
+            this.eventStatus
         );
         await firestore.collection('events').doc().set(event);
         res.send('Record saved successfuly');
@@ -38,7 +39,8 @@ const getAllevents = async (req, res, next) => {
                     doc.data().eventStartTime,
                     doc.data().eventEndTime,
                     doc.data().eventDate,
-                    doc.data().eventLocation
+                    doc.data().eventLocation,
+                    doc.data().eventStatus
                 );
                 event.id=doc.id;
                 eventsArray.push(event);
