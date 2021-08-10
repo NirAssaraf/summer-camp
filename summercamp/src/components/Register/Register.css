@@ -72,6 +72,16 @@
 
         align-items: center;
         text-align: right;
+        
+    }
+    #input-mail{
+        direction: rtl;
+        font-family: 'Alef', sans-serif;
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: black;
+        align-items: center;
+        text-align: right;
     }
     #userType-select{
         margin-bottom: 10px;
@@ -94,12 +104,11 @@
 
 
     }
-    #demo-simple-select-placeholder-label{
-        font-family: 'Alef', sans-serif;
-        font-size: 20px;
-
-
-    }
+ .error{
+     margin-top: 20px;
+     color: red;
+     font-size: 14px;
+ }
     .login-link{
        font-size: 15px;
        margin-top: 100px;
@@ -107,7 +116,7 @@
     }
        #register-submit{
            margin: 5px;
-           margin-top: 70px;
+           /* margin-top: 50px; */
            padding-left: 50px;
            padding-right: 50px;
            border-radius: 15px;

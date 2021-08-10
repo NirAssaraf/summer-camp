@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PoolBack from '../../Images/poolback.jpeg';
-import './AdminDashboard.css';
+import './UserDashboardNav.css';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
@@ -8,22 +8,16 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import {Redirect} from "react-router-dom";
 import Icon from '@material-ui/core/Icon';
-import Users from '../Users/Users';
 import Navbar from '../Navbar/Navbar1';
-import { Divide as Hamburger } from 'hamburger-react';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import axios from 'axios';
+import { Divide as Hamburger } from 'hamburger-react'
 
-export default class AdminDashboard extends Component {
+export default class UserDashboardNav extends Component {
     constructor(props, context) {
         super(props, context);
        this.state={
+       children:[],
        menuStatus: 0,
-       openMenu:false,
-       Users:[],
-       userType:'',
-
+       openMenu:false
 
        }
     
@@ -34,24 +28,10 @@ this.setMenuStatus=this.setMenuStatus.bind(this);
 this.closeMenu=this.closeMenu.bind(this);
 this.openMenu=this.openMenu.bind(this);
 this.getMenu=this.getMenu.bind(this);
-this.handleChangeSelect=this.handleChangeSelect.bind(this);
-
 
 
     }
-    componentDidMount(){
-      axios.get('http://10.100.102.6:8080/api/users')
-      .then(res => {
-        this.setState({Users:res.data})
-  
-      })
-    }
 
-    handleChangeSelect(event){
-      console.log(event.target.value)
-      this.setState({userType:event.target.value});
-
-    }
      handleClick = (event) => {
       this.setState({anchorEl:event.currentTarget});
     };
@@ -68,7 +48,7 @@ this.handleChangeSelect=this.handleChangeSelect.bind(this);
           },
           {
               name: 'תפריט',
-              link: '/profile/3798e56b-84bf-462d-806c-b682dadd5a15',
+              link: '/Foodmenu',
           },
           {
             name: 'תוכנית יומית',
@@ -134,41 +114,10 @@ getMenu() {
       <h1 className='summer_txt-Dashboard'> חלום של קיץ</h1>
 
       </div>
-
+{console.log(this.props.user)}
       </div >
       <p className='user-welcome'>  {this.props.user.name}</p>
-      <p className='admin-Dashboard'>דף מנהל</p>
 
-      <div className='my-children'> 
-      <div className='title-children'>
-        <h3> משתמשים</h3>
-           <FormControl  variant="standard" id='userType-select-admin'>
-        <Select
-        required
-        labelId="demo-simple-select-placeholder-label-label"
-        id="demo-simple-select-placeholder-label"
-          value={this.state.userType}
-          onChange={this.handleChangeSelect}
-          displayEmpty
-        >
-    <MenuItem value="">
-            <em>סינון לפי</em>
-          </MenuItem>
-          <MenuItem value='parent'>הורה</MenuItem>
-
-          <MenuItem value='מדריך'>מדריך</MenuItem>
-        </Select>
-      </FormControl>
-        </div>
-        <br/>
-        {this.state.Users.length===0?(<p>אין משתמשים</p>):''}
-        {this.state.Users.map((item,index)=>{
-          if(this.state.userType===''||item.role===this.state.userType)
-          return <Users user={item} />
-        })}
-
-
-      </div>
 
     </div>
 

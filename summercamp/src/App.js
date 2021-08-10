@@ -4,6 +4,9 @@ import Home from './components/Home/Home';
 import Register from './components/Register/Register';
 import UserDashboard from './components/UserDashboard/UserDashboard';
 import Navbar from './components/Navbar/Navbar1';
+import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import FoodMenu from './components/FoodMenu/FoodMenu';
+import ChildRegistration from './components/ChildRegistration/ChildRegistration';
 
 
 import React, {Fragment} from 'react';
@@ -12,7 +15,9 @@ class App extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-       user: 'דניאל',
+       user: {name:'danielle'},
+       loginStatus:false,
+
         
 
 
@@ -21,8 +26,13 @@ class App extends React.Component {
       this.setUser=this.setUser.bind(this);
     }
 
-    setUser(user){
-      this.setState({user})
+    setUser(user1){
+      console.log(user1)
+      console.log('setUser')
+
+      this.setState({user:user1})
+      this.setState({loginStatus:true});
+
     }
    getAppContent() { 
  
@@ -36,20 +46,41 @@ class App extends React.Component {
                        render={(props) =>
                            <Home {...props}
                            setUser={this.setUser}
+                           loginStatus={this.state.loginStatus}
+
                                  />} />
                                   <Route path={'/Register'} exact
                        render={(props) =>
                            <Register {...props}
                            setUser={this.setUser}
+                           user={this.state.user}
+                           loginStatus={this.state.loginStatus}
                                  />} />
                                         <Route path={'/UserDashboard'} exact
                        render={(props) =>
                            <UserDashboard {...props}
                            user={this.state.user}
                                  />} />
+                                             <Route path={'/AdminDashboard'} exact
+                       render={(props) =>
+                           <AdminDashboard {...props}
+                           user={this.state.user}
+                                 />} />
 
+<Route path={'/FoodMenu'} exact
+                       render={(props) =>
+                           <FoodMenu {...props}
+                           user={this.state.user}
+                                 />} />
+
+<Route path={'/ChildRegistration'} exact
+                       render={(props) =>
+                           <ChildRegistration {...props}
+                           user={this.state.user}
+                                 />} />
   
             </Switch>
+            
         </div>
     );
   }

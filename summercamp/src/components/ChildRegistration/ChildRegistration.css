@@ -1,0 +1,34 @@
+/* .Dashboard-tool{
+    height: 50px;
+    background-color: aqua;
+} */
+@media only screen and (max-width: 768px) {
+.ChildRegistration{
+    font-family: 'Alef', sans-serif;
+    direction: rtl;
+    color: rgb(22, 129, 158);
+    margin-top: 20px;
+    margin-right: 10px;
+    align-items: center;
+    text-align: center;
+
+
+
+}
+#form{
+    margin-top: 20px;
+    font-size: 14px;
+    font-family: 'Alef', sans-serif;
+    width: 80%;
+
+}
+
+#child{
+    font-size: 16px;
+    font-family: 'Alef', sans-serif;
+
+}
+.titel-ChildRegd{
+    margin-top: 50px;
+}
+}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PoolBack from '../../Images/poolback.jpeg';
-import './UserDashboard.css';
+import './FoodMenu.css';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
@@ -13,13 +13,13 @@ import UserDashboardNav from '../UserDashboardNav/UserDashboardNav';
 
 import { Divide as Hamburger } from 'hamburger-react'
 
-export default class UserDashboard extends Component {
+export default class FoodMenu extends Component {
     constructor(props, context) {
         super(props, context);
        this.state={
        children:[],
        menuStatus: 0,
-       addChild:false,
+       openMenu:false
 
        }
     
@@ -29,7 +29,9 @@ this.handleClose=this.handleClose.bind(this);
 
 
     }
+     today = new Date();
 
+    date =  this.today.getDate()  + '/' + (this.today.getMonth() + 1) + '/' +this.today.getFullYear();
      handleClick = (event) => {
       this.setState({anchorEl:event.currentTarget});
     };
@@ -38,34 +40,21 @@ this.handleClose=this.handleClose.bind(this);
        this.setState({anchorEl:null});
       
     };
+ 
 
-   
       render() {
         // if(this.props.user===null)
         // return <Redirect to={'/'}/>;
-     if(this.state.addChild)
-     {
-       this.setState({addChild:false})
-       return <Redirect to={'/ChildRegistration'}/>
-     }
+     
     return (
       
-    <div  className='UserDashboard'>
+    <div  className='FoodMenu'>
     
 <UserDashboardNav user={this.props.user}/>
-      <div className='my-children'> 
-      <div className='title-children'>
-        <h3>הילדים שלי</h3>
-        <Button onClick={()=>this.setState({addChild:true}) } id='add-child' variant="outlined" color="primary"> <Icon id='plus'>add_circle</Icon>  רישום ילד חדש</Button>
-        </div>
-        {this.state.children.length===0?(<p>לא נמצאו ילדים</p>):''}
-        {this.state.children.map((item,index)=>{
-          return <p>item</p>
-        })}
 
-
-      </div>
-
+<div className='Menu'>
+    <h3>התפריט ליום {this.date}</h3>
+</div>
     </div>
 
     );

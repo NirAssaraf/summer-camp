@@ -7,6 +7,7 @@ import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
 import {Redirect} from "react-router-dom";
+import axios from 'axios';
 
 export default class Home extends Component {
     constructor(props, context) {
@@ -15,21 +16,49 @@ export default class Home extends Component {
         username:'',
         password:'',
         loginStatus:false,
+        error:'',
        }
     
 this.handelSubmit=this.handelSubmit.bind(this);
     }
 
 handelSubmit(){
-  this.setState({loginStatus:true});
-  this.props.setUser(this.state.username)
 
-console.log('send')
-}
+  
+    this.setState({error:''})
+    if(this.state.username===''){
+    this.setState({error:"חסר שם משתמש"})
+    return
+    }
+
+
+    if(this.state.password===''){
+      this.setState({error:"חסר סיסמא"})
+      return
+      }
+  
+
+    const postData = {
+      password: this.state.password,
+      email:this.state.username,
+  };
+    axios.get('http://10.100.102.21:8080/api/user/'+postData.email+'/'+postData.password)
+    .then(res => {
+
+      console.log(res.data)
+      this.props.setUser(res.data)
+
+
+    })
+    .catch(() => {}   );
+    console.log('send')
+  }
+
+
 
 
       render() {
-        if(this.state.loginStatus)
+        if(this.props.loginStatus)
         return <Redirect to={'/UserDashboard'}/>;
 
     return (
@@ -39,15 +68,15 @@ console.log('send')
         <h1 className='h1'> קייטנת עושים גלים <span className='summer_txt'>חלום של קיץ</span></h1>
         <p id='pText'  className='h1'>18 שנה ברציפות</p>
 
-        <form onSubmit={this.handelSubmit} id='login' >
-        <FormControl className='login' onSubmit={this.handelSubmit} >
-  <InputLabel id="input-user"  htmlFor="input-user"  >שם משתמש</InputLabel>
+        <div  id='login' >
+        <FormControl className='login'  >
+  <InputLabel id="input-user"  htmlFor="input-user"  >מייל</InputLabel>
   <Input  required type='text' id="input-user" aria-describedby="my-helper-text" value={this.state.username} onChange={(e)=>this.setState({username:e.target.value})}/>
   
 </FormControl>
 <br/>
 
-        <FormControl onSubmit={this.handelSubmit} >
+        <FormControl  >
  
   <InputLabel id="input-pass" htmlFor="input-pass">סיסמא</InputLabel>
 
@@ -55,11 +84,11 @@ console.log('send')
 
 </FormControl>
 <br/>
-<Button id='login-submit' type="submit" value="Submit" variant="outlined" color="primary"  >
+<Button id='login-submit'  onClick={this.handelSubmit} type="submit" value="Submit" variant="outlined" color="primary"  >
   התחבר
     </Button>
 
-</form>
+</div>
 <a href='/Register' className='register-link'> לא משתמש רשום? לחץ כדי להירשם</a>
     </div>
 
