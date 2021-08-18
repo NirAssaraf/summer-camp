@@ -10,8 +10,11 @@ import {Redirect} from "react-router-dom";
 import Icon from '@material-ui/core/Icon';
 import Navbar from '../Navbar/Navbar1';
 import UserDashboardNav from '../UserDashboardNav/UserDashboardNav';
+import Child from '../Child/Child';
 
 import { Divide as Hamburger } from 'hamburger-react'
+import { ThemeProvider } from '@material-ui/core';
+import { isAuth } from '../../actions/auth';
 
 export default class UserDashboard extends Component {
     constructor(props, context) {
@@ -20,16 +23,22 @@ export default class UserDashboard extends Component {
        children:[],
        menuStatus: 0,
        addChild:false,
+       img:''
 
        }
     
 this.handleClick=this.handleClick.bind(this);
 this.handleClose=this.handleClose.bind(this);
+this.image=this.image.bind(this);
 
 
 
     }
 
+    componentDidMount(){
+      if(isAuth()!==null)
+this.setState({children:isAuth().childs})
+    }
      handleClick = (event) => {
       this.setState({anchorEl:event.currentTarget});
     };
@@ -38,11 +47,16 @@ this.handleClose=this.handleClose.bind(this);
        this.setState({anchorEl:null});
       
     };
+    image(url){
+this.setState({img:url})
+    }
 
    
       render() {
-        // if(this.props.user===null)
-        // return <Redirect to={'/'}/>;
+        if(isAuth()===null){
+        return <Redirect to={'/'}/>;
+
+        }
      if(this.state.addChild)
      {
        this.setState({addChild:false})
@@ -52,17 +66,18 @@ this.handleClose=this.handleClose.bind(this);
       
     <div  className='UserDashboard'>
     
-<UserDashboardNav user={this.props.user}/>
-      <div className='my-children'> 
-      <div className='title-children'>
-        <h3>הילדים שלי</h3>
-        <Button onClick={()=>this.setState({addChild:true}) } id='add-child' variant="outlined" color="primary"> <Icon id='plus'>add_circle</Icon>  רישום ילד חדש</Button>
+<UserDashboardNav user={isAuth()}  ShopCart={false}/>
+      <div className='my-children-user'> 
+      <div className='title-children-user'>
+        <h3 className='user-name' >הילדים שלי</h3>
+        <Button onClick={()=>this.setState({addChild:true}) } id='add-child-btn' variant="outlined" color="primary"> <Icon id='plus'>add_circle</Icon>  רישום ילד חדש</Button>
         </div>
         {this.state.children.length===0?(<p>לא נמצאו ילדים</p>):''}
+        <div style={{ width:'100%' ,alignItems:'center', textAlign:'center'}}>
         {this.state.children.map((item,index)=>{
-          return <p>item</p>
+          return <Child child={item} user={this.props.user} />
         })}
-
+</div>
 
       </div>
 

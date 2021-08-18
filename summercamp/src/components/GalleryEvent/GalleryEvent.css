@@ -1,0 +1,167 @@
+/* .Dashboard-tool{
+    height: 50px;
+    background-color: aqua;
+} */
+@media only screen and (max-width: 768px) {
+.menu {
+    /* display: flex; */
+    direction: rtl;
+    justify-content: right;
+    margin: 0px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #02064f;
+    padding-bottom: 5px;
+    background-size: 80%;
+    height: 100px;
+    margin-top: 50px;
+    /* background-color: #fefefeb9; */
+}
+#userType-select-user{
+margin-top: -7px;
+margin-right: 4px;
+width: 50%;
+}
+
+.user-btn{
+    background-color: rgba(114, 230, 203, 0.392);
+    border: none;
+    font-size: 16px;
+    margin: 3px;
+    padding: 5px;
+    font-family: 'Alef', sans-serif;
+    border-radius: 4px;
+    width: 80%;
+    color: rgb(17, 80, 97);
+
+
+}
+.delete{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    position: absolute;
+    top: -13px;
+    left: 0;
+    /* margin-right: 40%;
+    margin-top: -15px; */
+   
+}
+.save{
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    margin-right: 40px;
+    margin-top: -15px;
+   
+}
+    .user-details{
+    padding-top: 10px;
+    background-color: rgba(114, 230, 203, 0.201);
+    width: 80%;
+    margin: 3px;
+    margin-top: 0px;
+    color: rgb(17, 80, 97);
+    font-size: 14px;
+
+
+
+}
+
+#Hamburger{
+    position: absolute;
+    top: 0;
+    right: 0;
+    direction: rtl;
+    z-index: 100;
+}
+#plus{
+    font-size: 18px;
+    margin-left: 4px;
+    color: #4998B7;
+}
+#add-child{
+    /* margin-top: 10px; */
+    
+    margin-right: 120px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    color: black;
+    border: 2px #4998B7 solid;
+    background-color: white;
+    font-size: 14px;
+margin-bottom: 20px;
+    font-family: 'Alef', sans-serif;
+
+}
+.user-welcome{
+    position: absolute;
+    top: 120px;
+    right: 38px;
+    font-family: 'Alef', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(22, 129, 158);
+
+}
+.my-children{
+    position: absolute;
+    top:210px;
+    direction: rtl;
+    width: 100%;
+    right: 30px;
+    font-family: 'Alef', sans-serif;
+    color: rgb(22, 129, 158);
+
+    
+}
+.title-children{
+    display: flex;
+}
+.Dashboard-tool{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* cursor: pointer; */
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Alef', sans-serif;
+}
+.h1-Dashboard{
+    font-family: 'Suez One', serif;
+    position: absolute;
+    top: 2px;
+    right: 110px;
+    font-size: 22px;
+    font-weight: bold;
+    -webkit-text-stroke:0.01px rgb(51, 50, 50)  ;
+    direction: rtl;
+    font-weight: bold;
+
+    color: #F9F871;
+}
+#pText-Dashboard{
+    top: 150px;
+    right: 10px;
+    font-size: 25px;
+    color: #8FF1B0;
+}
+
+.summer_txt-Dashboard{
+    font-family: 'Suez One', serif;
+    position: absolute;
+    top: 18px;
+    left: 67px;
+    font-size: 22px;
+    font-weight: bold;
+    -webkit-text-stroke:0.01px rgb(51, 50, 50)  ;
+    direction: rtl;
+    font-weight: bold;
+    color:#72E6CB;
+    
+}
+
+}

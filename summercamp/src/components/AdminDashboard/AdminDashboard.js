@@ -10,10 +10,15 @@ import {Redirect} from "react-router-dom";
 import Icon from '@material-ui/core/Icon';
 import Users from '../Users/Users';
 import Navbar from '../Navbar/Navbar1';
+import Config from '../../config/config';
+import Child from '../Child/Child';
+import UserDashboardNav from '../UserDashboardNav/UserDashboardNav';
+
 import { Divide as Hamburger } from 'hamburger-react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
+import { isAuth } from '../../actions/auth';
 
 export default class AdminDashboard extends Component {
     constructor(props, context) {
@@ -23,30 +28,41 @@ export default class AdminDashboard extends Component {
        openMenu:false,
        Users:[],
        userType:'',
+       showList:10,
+       children:[],
+
+
 
 
        }
     
 this.handleClick=this.handleClick.bind(this);
 this.handleClose=this.handleClose.bind(this);
-this.getMenuOptions=this.getMenuOptions.bind(this);
-this.setMenuStatus=this.setMenuStatus.bind(this);
-this.closeMenu=this.closeMenu.bind(this);
-this.openMenu=this.openMenu.bind(this);
-this.getMenu=this.getMenu.bind(this);
+
 this.handleChangeSelect=this.handleChangeSelect.bind(this);
+this.handleChangeSelectList=this.handleChangeSelectList.bind(this);
 
 
 
     }
     componentDidMount(){
-      axios.get('http://10.100.102.6:8080/api/users')
+      if(isAuth().type!='0') 
+      this.setState({showList:20});
+
+      axios.get(Config.getServerPath()+'users')
       .then(res => {
         this.setState({Users:res.data})
   
       })
+      axios.get(Config.getServerPath()+'children')
+      .then(res => {
+        this.setState({children:res.data})
+  
+      })
     }
-
+    handleChangeSelectList(event){
+      this.setState({showList:event.target.value});
+    }
     handleChangeSelect(event){
       console.log(event.target.value)
       this.setState({userType:event.target.value});
@@ -60,88 +76,46 @@ this.handleChangeSelect=this.handleChangeSelect.bind(this);
        this.setState({anchorEl:null});
       
     };
-    getMenuOptions() {
-      return [
-          {
-              name: 'עמוד ראשי',
-              link: '/UserDashboard',
-          },
-          {
-              name: 'תפריט',
-              link: '/profile/3798e56b-84bf-462d-806c-b682dadd5a15',
-          },
-          {
-            name: 'תוכנית יומית',
-            link: '/profile/3798e56b-84bf-462d-806c-b682dadd5a15',
-        },
-        {
-          name: 'תמונות',
-          link: '/profile/3798e56b-84bf-462d-806c-b682dadd5a15',
-      }
-        
-      ];
-  
-}
-setMenuStatus(status) {
-  this.setState({menuStatus: status});
-}
-closeMenu() {
-  this.setMenuStatus(3);
-  this.setState({openMenu:false})
-
-  setTimeout(() => this.setMenuStatus(0), 200);
-}
-openMenu() {
-  if(!this.state.openMenu)   {
-    this.setMenuStatus(1);
-    setTimeout(() => this.setMenuStatus(2), 200);
-  }
-  else{
-    this.closeMenu();
-  }
-
-
-  this.setState({openMenu:!this.state.openMenu})
-
-
-}
-
-getMenu() {
-  if (this.state.menuStatus == 0) {
-      return null;
-  }
-  return <Navbar  options={this.getMenuOptions()}  menuStatus={this.state.menuStatus}
-  onClose={this.closeMenu}
-/>
-}
+   
 
 
       render() {
-        // if(this.props.user===null)
-        // return <Redirect to={'/'}/>;
+        if(this.props.user===null){
+          if(!this.props.updateUser())
+            //  return <Redirect to={'/'}/>;
+            return '';
+        }
      
     return (
       
     <div  className='UserDashboard'>
-      {this.getMenu()}
-      <div id='Hamburger'>
-      <Hamburger  color='rgb(49, 112, 136)' rounded direction="left" toggled={this.state.openMenu} toggle={this.openMenu} />
-      </div>
-      <div className='menu'>
-      <div className='Dashboard-tool'>
+    <UserDashboardNav user={this.props.user}/>
 
-      <h1 className='h1-Dashboard'> קייטנת עושים גלים </h1>
-      <h1 className='summer_txt-Dashboard'> חלום של קיץ</h1>
-
-      </div>
-
-      </div >
-      <p className='user-welcome'>  {this.props.user.name}</p>
+     
       <p className='admin-Dashboard'>דף מנהל</p>
 
       <div className='my-children'> 
       <div className='title-children'>
-        <h3> משתמשים</h3>
+
+
+       {isAuth().type!='0'? <h3> חניכים</h3>:
+        <FormControl  variant="standard" id='List-select-admin'>
+        <Select
+        required
+        labelId="demo-simple-select-placeholder-label-label"
+        id="val-admin"
+          value={this.state.showList}
+          onChange={this.handleChangeSelectList}
+          displayEmpty
+        >
+
+          <MenuItem id='val'value={10}>משתמשים</MenuItem>
+
+          <MenuItem id='val' value={20}>חניכים</MenuItem>
+        </Select>
+      </FormControl>
+      }
+      {this.state.showList===10?(
            <FormControl  variant="standard" id='userType-select-admin'>
         <Select
         required
@@ -154,19 +128,27 @@ getMenu() {
     <MenuItem value="">
             <em>סינון לפי</em>
           </MenuItem>
-          <MenuItem value='parent'>הורה</MenuItem>
-
-          <MenuItem value='מדריך'>מדריך</MenuItem>
+          <MenuItem value='1'>הורה</MenuItem>
+          <MenuItem value='0'>מנהל</MenuItem>
+          <MenuItem value='3'>אחראי מוצרים</MenuItem>
+          <MenuItem value='4'>אחראי לוז</MenuItem>
+          <MenuItem value='2'>מדריך</MenuItem>
+          
         </Select>
       </FormControl>
+      ):''}
         </div>
         <br/>
         {this.state.Users.length===0?(<p>אין משתמשים</p>):''}
-        {this.state.Users.map((item,index)=>{
-          if(this.state.userType===''||item.role===this.state.userType)
+       {this.state.showList==10?( this.state.Users.map((item,index)=>{
+          if(this.state.userType===''||item.type===this.state.userType)
           return <Users user={item} />
-        })}
-
+        })
+        ):(
+         this.state.children.map((item,index)=>{
+          return <Child child={item} />
+        })
+)}
 
       </div>
 

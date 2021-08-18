@@ -11,6 +11,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
 import {Redirect} from "react-router-dom";
+import Config from '../../config/config';
+import {signup,isAuth} from '../../actions/auth';
 
 
 export default class Register extends Component {
@@ -18,9 +20,13 @@ export default class Register extends Component {
     super(props, context);
     this.state = {
       username: '',
+      usernameE: false,
       password: '',
-      userType:'',
+      passwordE: false,
       mail:'',
+      mailE:false,
+      mailEmsg:'',
+
       error:''
     }
 
@@ -32,39 +38,50 @@ export default class Register extends Component {
 
   handelSubmit() {
    
-    this.setState({error:''})
+    this.setState({mailE:false})
+    this.setState({usernameE:false})
+    this.setState({passwordE:false})
+
+
+
+    let error=false;
     if(this.state.username===''){
-    this.setState({error:"חסר שם משתמש"})
-    return
+      this.setState({usernameE:true})
+    error=true;
     }
 
 
     if(this.state.mail===''){
-    this.setState({error:"חסר מייל"})
-    return
+    this.setState({mailEmsg:"חסר מייל"})
+    this.setState({mailE:true})
+    error=true;
+
+    }else  if(!this.state.mail.includes('@')){
+      this.setState({mailEmsg:"מייל לא תקין"})
+      this.setState({mailE:true})
+    error=true;
     }
     if(this.state.password===''){
-      this.setState({error:"חסר סיסמא"})
-      return
+      this.setState({passwordE:true})
+      error=true;
       }
-    if(!this.state.mail.includes('@')){
-      this.setState({error:"מייל לא תקין"})
-    return
-    }
+   
 
+    if(error) return
     const postData = {
       email: this.state.mail.trim(),
       password: this.state.password,
       name:this.state.username,
   };
-    axios.post('http://10.100.102.21:8080/api/user',postData)
+  signup(postData)
     .then(res => {
-if(res.data==='error'){
-this.setState({error:"המייל כבר קיים"})
+if(res.data.status==='faild'){
+  this.setState({mailEmsg:"המייל כבר קיים"})
+  this.setState({mailE:true})
 return
 }
 
-      this.props.setUser(res.data)
+      this.props.setUser(res.data.user)
 
     })
     .catch(() => {}   );
@@ -75,7 +92,7 @@ return
   };
 
   render() {
-    if(this.props.loginStatus)
+    if(isAuth())
     return <Redirect to={'/UserDashboard'}/>;
     return (
       <div className='Register' >
@@ -86,7 +103,8 @@ return
         <div  id='register-form' >
           <FormControl className='login'  >
             <InputLabel id="input-user" htmlFor="input-user"  >שם משתמש</InputLabel>
-            <Input required type='text' id="input-user" aria-describedby="my-helper-text" value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} />
+            <Input required type='text' error={this.state.usernameE} id="input-user" aria-describedby="my-helper-text" value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} />
+            {this.state.usernameE?  <FormHelperText  error={this.state.usernameE} id="helper">חסר שם </FormHelperText>:''}
 
           </FormControl>
 
@@ -95,7 +113,8 @@ return
 
 <InputLabel id="input-mail" htmlFor="input-mail">מייל</InputLabel>
 
-<Input required type='email'  id="input-mail" aria-describedby="my-helper-text" value={this.state.mail} onChange={(e) => this.setState({ mail: e.target.value })} />
+<Input required type='email' error={this.state.mailE}  id="input-mail" aria-describedby="my-helper-text" value={this.state.mail} onChange={(e) => this.setState({ mail: e.target.value })} />
+    {this.state.mailE?  <FormHelperText  error={this.state.mailE} id="helper">{this.state.mailEmsg}</FormHelperText>:''}
 
 </FormControl>
 <br/>
@@ -104,7 +123,8 @@ return
 
             <InputLabel id="input-pass" htmlFor="input-pass">סיסמא</InputLabel>
 
-            <Input id="input-pass" required type='password' id="input-pass" aria-describedby="my-helper-text" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+            <Input id="input-pass" error={this.state.passwordE} required type='password' id="input-pass" aria-describedby="my-helper-text" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
+            {this.state.passwordE?  <FormHelperText  error={this.state.passwordE} id="helper">חסר סיסמא </FormHelperText>:''}
 
           </FormControl>
 
@@ -126,7 +146,6 @@ return
           <MenuItem value={20}>מדריך</MenuItem>
         </Select>
       </FormControl> */}
-          <p className='error'>{this.state.error}</p>
           <button  onClick={this.handelSubmit} id='register-submit'  type="submit" value="Submit" variant="outlined" color="primary"  >
             הירשם
     </button>

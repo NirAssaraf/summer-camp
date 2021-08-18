@@ -1,0 +1,37 @@
+
+@media only screen and (max-width: 768px) {
+ 
+  .DailyPlan-add-btn{
+      position: absolute;
+      top:0;
+      right: 90px;
+    margin: 5px;
+    /* margin-top: 50px; */
+    padding-left: 50px;
+    padding-right: 50px;
+    border-radius: 15px;
+    color: black;
+    border: 2px #4998B7 solid;
+    background-color: whitesmoke;
+    font-size: 16px;
+margin-bottom: 20px;
+    font-family: 'Alef', sans-serif;
+
+}
+.all-day{
+    position: relative;
+    top: 10px;
+    left: 35px;
+}
+.daily-plan{
+    position: relative;
+    margin-top: -100px;
+}
+.DailyPlan{
+    position: relative;
+}
+.DailyPlan-add-btn:hover{
+    background-color: #4998B7;
+
+}
+}

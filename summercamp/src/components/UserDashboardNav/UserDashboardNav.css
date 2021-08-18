@@ -19,10 +19,10 @@
 }
 .UserDashboard{
     display: flex;
-    background-image: url('../../Images/das3.png');
+    background-image: url('../../Images/back12.png');
     background-size: 100%;
     width: 100%;
-    /* height: 300px; */
+    height: 300px;
 }
 #Hamburger{
     position: absolute;
@@ -31,59 +31,74 @@
     direction: rtl;
     z-index: 100;
 }
-#plus{
-    font-size: 18px;
-    margin-left: 4px;
-    color: #4998B7;
-}
-#add-child{
-    /* margin-top: 10px; */
-    
-    margin-right: 120px;
-    padding-left: 15px;
-    padding-right: 15px;
-    border-radius: 15px;
-    color: black;
-    border: 2px #4998B7 solid;
-    background-color: white;
-    font-size: 14px;
-margin-bottom: 20px;
-    font-family: 'Alef', sans-serif;
 
-}
-.user-welcome{
+
+.user-welcome-dash{
     position: absolute;
-    top: 120px;
-    right: 38px;
+    top: 154px;
+    left: 20px;
     font-family: 'Alef', sans-serif;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 22px;
     color: rgb(22, 129, 158);
 
 }
-.my-children{
+
+#Dashboard-tool{
+    display: flex;
     position: absolute;
-    top:210px;
+    top: 210px;
+    left: 90px;
     direction: rtl;
-    width: 100%;
-    right: 30px;
-    font-family: 'Alef', sans-serif;
-    color: rgb(22, 129, 158);
-
-    
-}
-.title-children{
-    display: flex;
-}
-.Dashboard-tool{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
+    z-index: 100;
     /* cursor: pointer; */
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
+    font-family: 'Alef', sans-serif;
+}
+.dot{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 2px rgb(22, 129, 158) solid ;
+    background-color: transparent;
+    position: absolute;
+    top: 1px;
+    z-index: 2px;
+    right: 6px;
+    font-size: 13px;
+}
+.dotp{
+    margin-top: -3px;
+    font-family: 'Alef', sans-serif;
+    font-weight: bold;
+    
+
+}
+
+#Dashboard-tool-btn{
+    
+    color: rgb(22, 129, 158);
+position: relative;
+    /* cursor: pointer; */
+    font-size: 40px;
+    font-family: 'Alef', sans-serif;
+}
+#Dashboard-logout-btn{
+    z-index: 100;
+    color: rgb(22, 129, 158);
+position: absolute;
+    /* cursor: pointer; */
+    top: 245px;
+    left: -10px;
+    font-size: 25px;
+    font-family: 'Alef', sans-serif;
+}
+#Dashboard-logout-btn-icon{
+    
+    color: rgb(22, 129, 158);
+
+    font-size: 25px;
     font-family: 'Alef', sans-serif;
 }
 .h1-Dashboard{

@@ -10,6 +10,8 @@ import {Redirect} from "react-router-dom";
 import Icon from '@material-ui/core/Icon';
 import Navbar from '../Navbar/Navbar1';
 import { Divide as Hamburger } from 'hamburger-react'
+import {signout,isAuth} from '../../actions/auth';
+import { useHistory } from 'react-router-dom'; // version 5.2.0
 
 export default class UserDashboardNav extends Component {
     constructor(props, context) {
@@ -17,7 +19,10 @@ export default class UserDashboardNav extends Component {
        this.state={
        children:[],
        menuStatus: 0,
-       openMenu:false
+       openMenu:false,
+       goCart:false,
+       logout:false,
+       exit:false,
 
        }
     
@@ -28,10 +33,18 @@ this.setMenuStatus=this.setMenuStatus.bind(this);
 this.closeMenu=this.closeMenu.bind(this);
 this.openMenu=this.openMenu.bind(this);
 this.getMenu=this.getMenu.bind(this);
+this.logout=this.logout.bind(this);
 
 
     }
 
+//     componentWillUpdate(){
+      
+//       if(this.state.exit){
+//       const navigate = useHistory();
+// navigate.go('/')
+//       }
+//     }
      handleClick = (event) => {
       this.setState({anchorEl:event.currentTarget});
     };
@@ -46,21 +59,39 @@ this.getMenu=this.getMenu.bind(this);
               name: 'עמוד ראשי',
               link: '/UserDashboard',
           },
+         
           {
               name: 'תפריט',
               link: '/Foodmenu',
           },
+        
           {
             name: 'תוכנית יומית',
-            link: '/profile/3798e56b-84bf-462d-806c-b682dadd5a15',
+            link: '/DailyPlan',
         },
+
         {
           name: 'תמונות',
-          link: '/profile/3798e56b-84bf-462d-806c-b682dadd5a15',
-      }
+          link: '/GalleryPlan',
+      },
+      (this.props.user.type!=='2')?
+      {
+        name: 'מוצרים',
+        link: '/shop',
+    }:'',
+    (this.props.user.type=='1')?
+    {
+      name: 'עגלת קניות',
+      link: '/shopcart',
+  }
+:''
         
       ];
   
+}
+logout(){
+  console.log('logout')
+signout(()=>this.setState({exit:true}))
 }
 setMenuStatus(status) {
   this.setState({menuStatus: status});
@@ -95,28 +126,39 @@ getMenu() {
 />
 }
 
+cartSize=isAuth().cart.length;
+
 
       render() {
-        // if(this.props.user===null)
-        // return <Redirect to={'/'}/>;
+      
+        if(this.state.exit)
+        return <Redirect to={'/'}/>;
+
+        if(this.state.goCart)
+        return <Redirect to={'/shopcart'}/>;
      
     return (
       
     <div  className='UserDashboard'>
+      {isAuth().type!='3'&&isAuth().type!='4'?<>
       {this.getMenu()}
       <div id='Hamburger'>
       <Hamburger  color='rgb(49, 112, 136)' rounded direction="left" toggled={this.state.openMenu} toggle={this.openMenu} />
       </div>
+     </> :''}
       <div className='menu'>
-      <div className='Dashboard-tool'>
+      {/* <div className='Dashboard-tool'>
 
       <h1 className='h1-Dashboard'> קייטנת עושים גלים </h1>
       <h1 className='summer_txt-Dashboard'> חלום של קיץ</h1>
 
-      </div>
-{console.log(this.props.user)}
+      </div> */}
       </div >
-      <p className='user-welcome'>  {this.props.user.name}</p>
+      <p className='user-welcome-dash'>  {this.props.user.name}</p>
+<div id='Dashboard-tool' >
+    {this.props.user.type==='1'?<Button disabled={this.props.ShopCart} onClick={()=>this.setState({goCart:true})} className='shopcart-btn' id='Dashboard-tool-btn' ><span   id='Dashboard-tool-btn' class="iconify" data-icon="foundation:shopping-cart" data-inline="false" ></span><div className='dot' ><p className='dotp' >{this.cartSize}</p></div></Button>:''}
+    </div>
+  <Button onClick={this.logout} id='Dashboard-logout-btn'><span id='Dashboard-logout-btn-icon'class="iconify" data-icon="ri:user-shared-fill" data-inline="false" ></span></Button>
 
 
     </div>
