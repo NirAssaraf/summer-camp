@@ -107,8 +107,8 @@ getTime(time){
 
       <div className={this.props.big?'event-time':'event-time-small'} style={{display:'flex',marginRight:'20px'}} dir="rtl">
         
-            <p className={this.props.big?'time':'time-small'}>{this.state.startTime} -</p>
-        <p className={this.props.big?'time':'time-small'}>{this.state.endTime}</p>
+            <p className={this.props.big?'time':'time-small-e'}>{this.state.startTime} -</p>
+        <p className={this.props.big?'time':'time-small-e'}>{this.state.endTime}</p>
         <h4 className={this.props.big?'discription':'discription-small'}>{this.props.event.discription}</h4>
         {(isAuth().type=='0'||isAuth().type=='4')&& !this.props.big?  <button onClick={this.deleteEvent} className='delete-event'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
 

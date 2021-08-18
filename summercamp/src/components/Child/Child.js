@@ -118,7 +118,7 @@ console.log('update user')
        <p>דרך הגעה : {this.props.child.wayHome}</p>
        <p> קשיים חברתיים : {this.props.child.SD}</p>
 
-      {isAuth().type==='0'||isAuth().type==='1'? <button onClick={this.deleteChild} className='delete'><span class="iconify" data-icon="eva:person-delete-fill" data-inline="false"></span></button>:''}
+      {isAuth().type==='0'||isAuth().type==='1'? <button  onClick={this.deleteChild} className='delete'><span class="iconify" data-icon="eva:person-delete-fill" data-inline="false"></span></button>:''}
       {isAuth().type==='0'||isAuth().type==='1'?  <button onClick={this.openEdit} className='update-child'><span class="iconify" data-icon="fa-solid:user-edit" data-inline="false" ></span></button>:''}
 
        </div>

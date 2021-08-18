@@ -3,28 +3,10 @@
     background-color: aqua;
 } */
 @media only screen and (max-width: 768px) {
-.menu {
-    /* display: flex; */
-    direction: rtl;
-    justify-content: right;
-    margin: 0px;
-    font-weight: bold;
-    font-size: 18px;
-    color: #02064f;
-    padding-bottom: 5px;
-    background-size: 80%;
-    height: 100px;
-    margin-top: 50px;
-    /* background-color: #fefefeb9; */
-}
-#userType-select-user{
-margin-top: -7px;
-margin-right: 4px;
-width: 50%;
-}
 
-.user-btn{
-    background-color: rgba(114, 230, 203, 0.392);
+
+.users-btn{
+    background-color:rgba(177, 226, 255, 0.598);
     border: none;
     font-size: 16px;
     margin: 3px;
@@ -55,9 +37,9 @@ width: 50%;
     margin-top: -15px;
    
 }
-    .user-details{
+    .user-detail{
     padding-top: 10px;
-    background-color: rgba(114, 230, 203, 0.201);
+    background-color:#ffebcd62;
     width: 80%;
     margin: 3px;
     margin-top: 0px;
@@ -68,18 +50,7 @@ width: 50%;
 
 }
 
-#Hamburger{
-    position: absolute;
-    top: 0;
-    right: 0;
-    direction: rtl;
-    z-index: 100;
-}
-#plus{
-    font-size: 18px;
-    margin-left: 4px;
-    color: #4998B7;
-}
+
 #add-child{
     /* margin-top: 10px; */
     
@@ -116,51 +87,7 @@ margin-bottom: 20px;
 
     
 }
-.title-children{
-    display: flex;
-}
-.Dashboard-tool{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    /* cursor: pointer; */
-    font-weight: bold;
-    font-size: 18px;
-    font-family: 'Alef', sans-serif;
-}
-.h1-Dashboard{
-    font-family: 'Suez One', serif;
-    position: absolute;
-    top: 2px;
-    right: 110px;
-    font-size: 22px;
-    font-weight: bold;
-    -webkit-text-stroke:0.01px rgb(51, 50, 50)  ;
-    direction: rtl;
-    font-weight: bold;
 
-    color: #F9F871;
-}
-#pText-Dashboard{
-    top: 150px;
-    right: 10px;
-    font-size: 25px;
-    color: #8FF1B0;
-}
 
-.summer_txt-Dashboard{
-    font-family: 'Suez One', serif;
-    position: absolute;
-    top: 18px;
-    left: 67px;
-    font-size: 22px;
-    font-weight: bold;
-    -webkit-text-stroke:0.01px rgb(51, 50, 50)  ;
-    direction: rtl;
-    font-weight: bold;
-    color:#72E6CB;
-    
-}
+
 }

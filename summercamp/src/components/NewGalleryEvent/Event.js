@@ -86,8 +86,8 @@ getMenu(menu){
       <div className={this.props.big?'event-gallery':'event-gallery-small'} style={{display:'flex',marginRight:'20px'}} dir="rtl">
         
             {/* <p className={this.props.big?'time':'time-small'}>{this.state.menu} -</p> */}
-        <img src={this.props.event} className={this.props.big?'img-gallery':'img-gallery-small'}/>  
-        {(isAuth().type=='0'||isAuth().type=='2') &&!this.props.big? <button onClick={this.deleteImg} className='delete-event'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
+        <img src={this.props.event} onClick={this.props.openImageViewer} className={this.props.big?'img-gallery':'img-gallery-small'}/>  
+        {(isAuth().type=='0'||isAuth().type=='2') &&!this.props.big? <button onClick={this.deleteImg} className='delete-event-img'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
 
 
 

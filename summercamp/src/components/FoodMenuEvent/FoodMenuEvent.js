@@ -102,9 +102,9 @@ console.log('delete user')
      if(this.state.delete) return '';
     return (
       
-    <div  className='day-event'>
+    <div  className='menu-event'>
      <button className='menu-btn' onClick={this.handleClick}>{this.date}</button>
-     {(isAuth().type=='0'||isAuth().type=='2')?<button onClick={this.deleteFoodMenu} className='delete-event'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
+     {(isAuth().type=='0'||isAuth().type=='2')?<button onClick={this.deleteFoodMenu} className='delete-event-btn'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
 
      {this.state.toggle?(<div className='event-details'>
        {/* <div style={{ position:'relative'}}> */}
@@ -132,7 +132,7 @@ console.log('delete user')
         })}
         </div>
       
-        {(isAuth().type=='0'||isAuth().type=='2')? <button onClick={this.addToMenu} className='add-to-event'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>:''}
+        {(isAuth().type=='0'||isAuth().type=='2')? <button onClick={this.addToMenu} className='add-to-event-menu'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>:''}
 
        {/* </div> */}
 

@@ -73,7 +73,7 @@ this.setState({img:url})
         <Button onClick={()=>this.setState({addChild:true}) } id='add-child-btn' variant="outlined" color="primary"> <Icon id='plus'>add_circle</Icon>  רישום ילד חדש</Button>
         </div>
         {this.state.children.length===0?(<p>לא נמצאו ילדים</p>):''}
-        <div style={{ width:'100%' ,alignItems:'center', textAlign:'center'}}>
+        <div style={{ width:'100%' ,alignItems:'center', textAlign:'center', marginTop:'10px'}}>
         {this.state.children.map((item,index)=>{
           return <Child child={item} user={this.props.user} />
         })}

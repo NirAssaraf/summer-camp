@@ -92,14 +92,14 @@ this.handleChangeSelectList=this.handleChangeSelectList.bind(this);
     <UserDashboardNav user={this.props.user}/>
 
      
-      <p className='admin-Dashboard'>דף מנהל</p>
+      {/* <p className='admin-Dashboard'>דף מנהל</p> */}
 
-      <div className='my-children'> 
+      <div className='my-children-admin'> 
       <div className='title-children'>
 
 
        {isAuth().type!='0'? <h3> חניכים</h3>:
-        <FormControl  variant="standard" id='List-select-admin'>
+        <FormControl  variant="standard" id='List-select-admin-e'>
         <Select
         required
         labelId="demo-simple-select-placeholder-label-label"

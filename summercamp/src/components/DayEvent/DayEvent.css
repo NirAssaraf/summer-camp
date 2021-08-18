@@ -53,16 +53,17 @@
 .add-to-event-day{
    
     margin: 5px;
+    direction: rtl;
     /* margin-top: 50px; */
     color: #4998B7;
-  position: relative;
+    position: relative;
   padding-left: 20px;
   padding-right: 20px;
   align-self: center;
     border-radius: 15px;
     color: black;
     border: 2px #4998B7 solid;
-    background-color: whitesmoke;
+    background-color: white;
   margin-bottom: 20px;
     font-family: 'Alef', sans-serif;
   }
@@ -73,7 +74,10 @@
     color: #4998B7;
 }
 
+.day-event{
+    justify-items: right;
 
+}
 
 
 }

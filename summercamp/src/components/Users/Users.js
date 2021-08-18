@@ -92,8 +92,8 @@ console.log('update user')
     return (
       
     <div  className='Users'>
-     <button className='user-btn' onClick={this.handleClick}>{this.props.user.name}</button>
-     {this.state.toggle?(<div className='user-details'>
+     <button className='users-btn' onClick={this.handleClick}>{this.props.user.name}</button>
+     {this.state.toggle?(<div className='user-detail'>
        <div style={{display:'flex', position:'relative'}}>
 
        <p>מייל : {this.props.user.email}</p>

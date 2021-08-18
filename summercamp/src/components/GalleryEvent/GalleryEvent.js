@@ -17,6 +17,7 @@ import axios from 'axios';
 import Event from '../NewGalleryEvent/Event';
 import { format } from 'date-fns';
 import { isAuth } from '../../actions/auth';
+import MyImageViewer from './MyImageViewer';
 
 
 export default class GalleryEvent extends Component {
@@ -24,8 +25,10 @@ export default class GalleryEvent extends Component {
         super(props, context);
        this.state={
   event:[],
+  viewerImage:[],
   edit:false,
-       
+  isOpen:false,
+  currentImage:0,
 
        }
     
@@ -33,15 +36,33 @@ this.handleClick=this.handleClick.bind(this);
 this.handleChangeSelect=this.handleChangeSelect.bind(this);
 this.updateUser=this.updateUser.bind(this);
 this.deleteDay=this.deleteDay.bind(this);
+this.closeImageViewer=this.closeImageViewer.bind(this);
 
 
 
     }
     componentDidMount(){
       this.setState({event:this.props.day.photos})
+      let itemArr=[];
+      this.props.day.photos.map((item,index)=>{
+         let src=item;
+        itemArr.push(item.url)
+
+      })
+      this.setState({viewerImage:itemArr});
       // this.setState({event:sort})
 
     }
+    openImageViewer = ((index) => {
+      this.setState({currentImage:index})
+      this.props.setShowMenu();
+      this.setState({isOpen:true})
+    })
+    closeImageViewer = () => {
+      this.setState({currentImage:0})
+      this.setState({isOpen:false})
+      this.props.setShowMenu();
+    };
   date=format(new Date(this.props.day.date), 'dd/MM/yy')
   deleteDay(){
    
@@ -96,19 +117,27 @@ console.log('update user')
      if(this.state.delete) return '';
     return (
       
-    <div  className='day-event'>
-     <button className='user-btn' onClick={this.handleClick}>{this.date}</button>
+    <div  className='gallery-event'>
+     <button className='gallery-btn' onClick={this.handleClick}>{this.date}</button>
      {(isAuth().type=='0'||isAuth().type=='2')?  <button onClick={this.deleteDay} className='delete-event'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
 
-     {this.state.toggle?(<div className='event-details'>
+     {this.state.toggle?(<div className='gallery-details'>
        {/* <div style={{ position:'relative'}}> */}
 
       { this.state.event.map((item,index)=>{
-          return  <Event event={item.url} eventId={item._id}big={false} day={this.props.day} />
+          return  <Event key={index} openImageViewer={()=>this.openImageViewer(index)} event={item.url} eventId={item._id}big={false} day={this.props.day} />
 
         })}
-      
-      {(isAuth().type=='0'||isAuth().type=='2')? <button onClick={()=>this.setState({edit:true})} className='add-to-event'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>:''}
+       {this.state.isOpen && (
+        <MyImageViewer
+        images={ this.state.viewerImage }
+          currentIndex={ this.state.currentImage }
+          onClose={ this.closeImageViewer }
+          date={this.date}
+       
+        />
+      )}
+      {(isAuth().type=='0'||isAuth().type=='2')? <button onClick={()=>this.setState({edit:true})} className='add-to-event-gallery'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>:''}
 
        {/* </div> */}
 

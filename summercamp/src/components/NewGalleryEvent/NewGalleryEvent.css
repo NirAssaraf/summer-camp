@@ -16,6 +16,7 @@
 
 
 }
+
 .menu-type{
     font-family: 'Alef', sans-serif;
     color: rgb(22, 129, 158);
@@ -160,6 +161,7 @@ margin-bottom: 20px;
     border-radius: 10px;
     width: 80%;
     padding-top: 1px;
+    position: relative;
     direction: rtl;
     margin-top: 10px;
 
@@ -171,9 +173,10 @@ margin-bottom: 20px;
 
 }
 .img-gallery-small{
-    width: 80%;
-    margin-top: 15px;
-    margin-right: 40px;
+    width: 100%;
+    position: relative;
+    /* margin-top: 15px;
+    margin-right: 40px; */
 
 }
 .time{
@@ -201,11 +204,12 @@ margin-bottom: 20px;
     
 
 }
-.delete-event{
+.delete-event-img{
     background-color: transparent;
     border: none;
     position: absolute;
-    left: 10px;
+    top: -10px;
+    left: -10px;
     margin-top: 5px;
 }
 #Gallery-submit-event{

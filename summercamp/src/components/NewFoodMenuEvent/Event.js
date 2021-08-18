@@ -83,11 +83,11 @@ getMenu(menu){
       if(this.state.delete) return '';
     return (
 
-      <div className={this.props.big?'event-menu':'event-menu-small'} style={{display:'flex',marginRight:'20px'}} dir="rtl">
+      <div className={this.props.big?'event-menu':'event-menu-small'} style={{display:'flex'}} dir="rtl">
         
             {/* <p className={this.props.big?'time':'time-small'}>{this.state.menu} -</p> */}
         <p className={this.props.big?'discription-menu':'discription-menu-small'}> <span class="iconify" data-icon="ic:baseline-restaurant-menu" data-inline="false"></span>  {this.props.event.discription}</p>
-        {(isAuth().type=='0'||isAuth().type=='2') &&!this.props.big?  <button onClick={this.deleteEvent} className='delete-event'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
+        {(isAuth().type=='0'||isAuth().type=='2') &&!this.props.big?  <button onClick={this.deleteEvent} className='delete-event-b'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
 
 
 

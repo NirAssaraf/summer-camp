@@ -23,6 +23,7 @@ export default class UserDashboardNav extends Component {
        goCart:false,
        logout:false,
        exit:false,
+       userType:'',
 
        }
     
@@ -37,14 +38,21 @@ this.logout=this.logout.bind(this);
 
 
     }
+    componentDidMount(){
+      const user=isAuth();
+      if(user.type==='0'){
+        this.setState({userType:'מנהל'})
+      } else if(user.type==='1'){
+        this.setState({userType:'הורה'})
+      } else if(user.type==='2'){
+        this.setState({userType:'מדריך'})
+      } else if(user.type==='3'){
+        this.setState({userType:'אחראי מוצרים'})
+      } else if(user.type==='4'){
+        this.setState({userType:'אחרי לוז'})
+      }
+    }
 
-//     componentWillUpdate(){
-      
-//       if(this.state.exit){
-//       const navigate = useHistory();
-// navigate.go('/')
-//       }
-//     }
      handleClick = (event) => {
       this.setState({anchorEl:event.currentTarget});
     };
@@ -140,7 +148,8 @@ cartSize=isAuth().cart.length;
     return (
       
     <div  className='UserDashboard'>
-      {isAuth().type!='3'&&isAuth().type!='4'?<>
+      {console.log(this.props.showMenu)}
+      {isAuth().type!='3'&&isAuth().type!='4'&&(this.props.showMenu||this.props.showMenu===undefined)?<>
       {this.getMenu()}
       <div id='Hamburger'>
       <Hamburger  color='rgb(49, 112, 136)' rounded direction="left" toggled={this.state.openMenu} toggle={this.openMenu} />
@@ -160,6 +169,7 @@ cartSize=isAuth().cart.length;
     </div>
   <Button onClick={this.logout} id='Dashboard-logout-btn'><span id='Dashboard-logout-btn-icon'class="iconify" data-icon="ri:user-shared-fill" data-inline="false" ></span></Button>
 
+    <p className='type-Dashboard'>{this.state.userType}</p>
 
     </div>
 

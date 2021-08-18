@@ -1,18 +1,18 @@
 
 @media only screen and (max-width: 768px) {
  
-  .DailyPlan-add-btn{
+  .FoodPlan-add-btn{
       position: absolute;
-      top:0;
-      right: 90px;
+      top:75px;
+      right: 20px;
     margin: 5px;
     /* margin-top: 50px; */
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 35px;
+    padding-right: 35px;
     border-radius: 15px;
     color: black;
     border: 2px #4998B7 solid;
-    background-color: whitesmoke;
+    background-color: white;
     font-size: 16px;
 margin-bottom: 20px;
     font-family: 'Alef', sans-serif;
@@ -29,7 +29,7 @@ margin-bottom: 20px;
 .all-menu{
     position: relative;
     top: 10px;
-    left: 35px;
+    right: 35px;
 }
 /* .daily-plan{
     position: relative;

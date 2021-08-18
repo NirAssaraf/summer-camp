@@ -9,7 +9,7 @@
     color: rgb(22, 129, 158);
     font-size: 18px;
     font-weight: bold;
-    margin-right: 40px;
+    /* margin-right: 40px; */
     direction: rtl;
 
 }
@@ -39,19 +39,19 @@ width: 50%;
 
 
 }
-.add-to-event{
-   
+.add-to-event-menu{
   margin: 5px;
+  width: 40%;
   /* margin-top: 50px; */
   color: #4998B7;
-position: absolute;
+position: relative;
+margin-right: 35px;
 padding-left: 20px;
 padding-right: 20px;
-right: 65px;
   border-radius: 15px;
   color: black;
   border: 2px #4998B7 solid;
-  background-color: whitesmoke;
+  background-color: white;
 margin-bottom: 20px;
   font-family: 'Alef', sans-serif;
 }
@@ -90,12 +90,18 @@ margin-bottom: 20px;
 
 #plus-menu{
     font-size: 10px;
-    margin-right: 4px;
+    margin-left: 7px;
     color: #4998B7;
 
 }
-
-
+.menu-event{
+    direction: rtl;
+}
+.delete-event-btn{
+    border: none;
+    background-color: transparent;
+  
+}
 
 
 }

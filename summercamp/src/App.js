@@ -78,6 +78,9 @@ class App extends React.Component {
           this.setState({dayEvent:day})
     }
     updateMenuEvent(menu){
+      console.log('menu')
+
+      console.log(menu)
       this.setState({menuEvent:menu})
 }
 updateGalleryEvent(gallery){

@@ -14,18 +14,23 @@ import Config from '../../config/config';
 import axios from 'axios';
 import { Divide as Hamburger } from 'hamburger-react'
 import { isAuth } from '../../actions/auth';
-
+import { format } from 'date-fns';
+import DatePicker from "react-datepicker";
 export default class GalleryPlan extends Component {
     constructor(props, context) {
         super(props, context);
        this.state={
         GalleryPlan:[],
         newGalleryDay:false,
+        startDate:'',
+        showMenu:true,
       
 
        }
     
 this.handleClickAddGalleryDay=this.handleClickAddGalleryDay.bind(this);
+this.cleanDateSelect=this.cleanDateSelect.bind(this);
+this.setShowMenu=this.setShowMenu.bind(this);
 
 
 
@@ -37,16 +42,13 @@ this.handleClickAddGalleryDay=this.handleClickAddGalleryDay.bind(this);
      handleClickAddGalleryDay = (event) => {
        this.setState({GalleryDay:true})
     };
+    setShowMenu(){
+this.setState({showMenu:!this.state.showMenu})
+    }
   
-   
-    // componentDidMount(){
-    //   axios.get(Config.getServerPath()+'photo')
-    //   .then(res => {
-    //     console.log(res.data.day)
-    //     this.setState({GalleryPlan:res.data.day})
-  
-    //   })
-    // }
+    cleanDateSelect(){
+      this.setState({startDate:''})
+    }
 
       render() {
         if(this.props.user===null){
@@ -58,15 +60,27 @@ this.handleClickAddGalleryDay=this.handleClickAddGalleryDay.bind(this);
     return (
       
     <div  className='DailyPlan'>
-<UserDashboardNav user={this.props.user}/>
+<UserDashboardNav user={this.props.user} showMenu={this.state.showMenu}/>
 <div className='daily-plan'>
-{(isAuth().type=='0'||isAuth().type=='2')?<button onClick={this.handleClickAddGalleryDay} className='DailyPlan-add-btn'>הוסף יום גלרייה חדש</button>:''}
+<p className='shop-titles'> גלרייה</p>
 
+{(isAuth().type=='0'||isAuth().type=='2')?<button onClick={this.handleClickAddGalleryDay} className='GalleryPlan-add-btn'>הוסף אלבום חדש</button>:''}
+<div className='date-select'>
+{this.state.startDate!==''?<button  onClick={this.cleanDateSelect} className='date-select-btn-clean' ><span class="iconify" data-icon="ph:x" data-inline="false" ></span></button>:''}
+
+<DatePicker placeholderText='בחר תאריך לסינון' id='date-piker-select'   dateFormat="dd/MM/yy" selected={this.state.startDate} onChange={(date) => this.setState({startDate: date})} />
 </div>
-<div className='all-days'>
+</div>
+<div className='all-photo'>
 { this.props.galleryEvent.map((item,index)=>{
-          
-          return <GalleryEvent day={item} />
+                if(this.state.startDate!==''){
+                  const dateState=format(new Date(this.state.startDate), 'dd/MM/yy')
+                  const dateItem=format(new Date(item.date), 'dd/MM/yy')
+               
+                       if(dateState===dateItem)
+                              return <GalleryEvent  key={index} day={item} setShowMenu={this.setShowMenu}/>
+                 }else       return <GalleryEvent key={index}  day={item} setShowMenu={this.setShowMenu} />
+    
 
         })}
 </div>
