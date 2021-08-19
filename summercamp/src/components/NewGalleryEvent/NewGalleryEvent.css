@@ -159,10 +159,10 @@ margin-bottom: 20px;
 }
 .event-gallery-small{
     border-radius: 10px;
-    width: 80%;
+    width: 100%;
     padding-top: 1px;
     position: relative;
-    direction: rtl;
+    direction: ltr;
     margin-top: 10px;
 
 }

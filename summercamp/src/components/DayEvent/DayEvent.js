@@ -103,7 +103,7 @@ console.log('update user')
      <button className='day-btn' onClick={this.handleClick}>{this.date}</button>
      {(isAuth().type=='0'||isAuth().type=='4')?  <button onClick={this.deleteDay} className='delete-event'><span class="iconify" data-icon="fluent:delete-dismiss-24-regular" data-inline="false" ></span></button>:''}
 
-     {this.state.toggle?(<div className='event-details'>
+     {this.state.toggle?(<div className='event-details-d'>
        {/* <div style={{ position:'relative'}}> */}
 
       { this.state.event.map((item,index)=>{
@@ -113,7 +113,7 @@ console.log('update user')
       
       
        {/* </div> */}
-       {(isAuth().type=='0'||isAuth().type=='4')? <button onClick={()=>this.setState({add:true})} className='add-to-event-day'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>:''}
+   <button hidden={(isAuth().type!='0'&&isAuth().type!='4')} onClick={()=>this.setState({add:true})} className='add-to-event-day-e'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>
 
      </div>):''}
 

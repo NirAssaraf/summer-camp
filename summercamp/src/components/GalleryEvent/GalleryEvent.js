@@ -137,7 +137,7 @@ console.log('update user')
        
         />
       )}
-      {(isAuth().type=='0'||isAuth().type=='2')? <button onClick={()=>this.setState({edit:true})} className='add-to-event-gallery'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>:''}
+ <button hidden={(isAuth().type!='0'&&isAuth().type!='2')} onClick={()=>this.setState({edit:true})} className='add-to-event-gallery'><span id='plus-menu' class="iconify" data-icon="bi:plus-lg" data-inline="false" ></span>הוסף </button>
 
        {/* </div> */}
 
